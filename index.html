@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AddressBook</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+
+<body>
+  <div class="container" data-bind-id="addressBook">
+    <header class="header">
+      <h1>My Address Book</h1>
+    </header>
+    <main>
+      <section class="add-section">
+        <form class="add-form" action="#">
+          <div>
+            <label for="full-name">Name</label>
+            <input id="full-name" type="text" placeholder="John Smith"
+              data-bind="value: fullName, valueUpdate: 'keyup'" />
+          </div>
+          <div>
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="text" placeholder="00 00 000000"
+              data-bind="value: phoneNumber, valueUpdate: 'afterkeydown' , event: {keypress: formatPhoneNumber}" maxlength="12" />
+          </div>
+          <button class="btn" data-bind="click: addContact, disable: buttonDisabled()">Add</button>
+        </form>
+      </section>
+      <section class="address-book-section">
+         <!-- ko if: showTable() -->
+        <table class="address-table hidden" data-bind="css: {'hidden': !showTable()}">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+            </tr>
+          </thead>
+          <tbody data-bind="foreach: contactInfo">
+            <tr>
+              <td data-bind="text: contactName"></td>
+              <td data-bind="text: contactPhone"></td>
+            </tr>
+            <!--  <tr>
+              <td>Mike</td>
+              <td>22 33 123456</td>
+            </tr> -->
+          </tbody>
+        </table>
+        <!-- /ko -->
+      </section>
+    </main>
+  </div>
+  <script type="text/javascript" src="script/knockout-3.5.1.js"></script>
+  <script type="text/javascript" src="script/knockout.validation.js"></script>
+  <script type="text/javascript" src="script/validation.js"></script>
+  <script src="script/app.js"></script>
+</body>
+
+</html>
